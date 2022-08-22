@@ -177,7 +177,7 @@ def connect_pal(request):
             for value in pal:
                 value_bases = list(value.bases.all())
                 print(list(map(lambda base: base.name, value_bases)))
-                pal_email = {'key': value.pk,
+                pal_info = {'key': value.pk,
                              'email': value.email,
                              'first_name': value.first_name,
                              'last_name': value.last_name,
@@ -185,7 +185,7 @@ def connect_pal(request):
                              'rate': value.rate,
                              'bases': list(map(lambda base: base.name,
                                                value_bases))}
-                emails.append(pal_email)
+                emails.append(pal_info)
         print(emails)
         return JsonResponse({'data': emails})
     else:

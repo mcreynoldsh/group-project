@@ -73,7 +73,7 @@ const ChatPage = (props) => {
 
     return (
         <Chat client={client}>
-
+            
             <Channel channel={channel}>
                 <Window>
                     <ChannelHeader />

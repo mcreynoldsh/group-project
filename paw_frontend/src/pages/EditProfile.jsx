@@ -71,7 +71,7 @@ function EditProfile(props) {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formZip">
                             <Form.Label>Zip Code</Form.Label>
-                            <Form.Control type="Zip Code" placeholder="Zip Code" />
+                            <Form.Control type="Zip Code" defaultValue={props.user.zip_code} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBio">
                             <Form.Label>Bio:</Form.Label>
