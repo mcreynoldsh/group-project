@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStopwatch } from 'react-timer-hook';
 import { Button } from 'react-bootstrap'
+import { TrackWalker } from './TrackWalker';
 
 function MyStopwatch(props) {
   const {
@@ -22,6 +23,7 @@ function MyStopwatch(props) {
   const beginWalk = (event) => {
     event.preventDefault()
     start()
+
     props.setEnd(false)
   }
   return (
@@ -35,6 +37,7 @@ function MyStopwatch(props) {
       <Button variant='primary' size='sm' onClick={beginWalk}>Begin Walk</Button>
       <Button className="m-1" variant='secondary' size='sm' onClick={pause}>Pause Walk</Button>
       <Button variant='danger' size='sm' onClick={endWalk}>End Walk</Button>
+      <TrackWalker />
     </div>
   );
 }

@@ -1,0 +1,295 @@
+{
+    "name": "Naval Support Activity Bahrain",
+    "location": {
+        "lat": 26.209802796683967,
+        "lng": 50.608004038655125
+    }
+}, {
+    "name": "US Army Garrison Benelux",
+    "location": {
+        "lat": 50.576622066579624,
+        "lng": 3.8309125943314393
+    }
+}, {
+    "name": "Naval Station Guantanamo Bay",
+    "location": {
+        "lat": 19.902649628969066,
+        "lng": -75.10018203304942
+    }
+}, {
+    "name": "Geilenkirchen NATO Air Base",
+    "location": {
+        "lat": 50.96140328772405,
+        "lng": 6.041972959601454
+    }
+}, {
+    "name": "Ramstein Air Base",
+    "location": {
+        "lat": 49.44016449435256,
+        "lng": 7.597054091829066
+    }
+}, {
+    "name": "Spangdahlem Air Base",
+    "location": {
+        "lat": 49.974594504102846,
+        "lng": 6.699048436203589
+    }
+}, {
+    "name": "US Army Garrison Ansbach",
+    "location": {
+        "lat": 49.313645777875884,
+        "lng": 10.644170520842225
+    }
+}, {
+    "name": "US Army Garrison Baumholder",
+    "location": {
+        "lat": 49.61782309291391,
+        "lng": 7.329059940317824
+    }
+}, {
+    "name": "US Army Garrison Bavaria",
+    "location": {
+        "lat": 49.71486815187095,
+        "lng": 11.913665985333823
+    }
+}, {
+    "name": "US Army Garrison Hohenfels",
+    "location": {
+        "lat": 49.22562999212954,
+        "lng": 11.829961794772236
+    }
+}, {
+    "name": "US Army Garrison Rheinland-Pfalz",
+    "location": {
+        "lat": 49.44305065013899,
+        "lng": 7.808410914376159
+    }
+}, {
+    "name": "US Army Garrison Stuttgart",
+    "location": {
+        "lat": 48.68315712877666,
+        "lng": 9.048884789054538
+    }
+}, {
+    "name": "US Army Garrison Wiesbaden",
+    "location": {
+        "lat": 50.07432854349441,
+        "lng": 8.26459611353355
+    }
+}, {
+    "name": "USAG Bavaria, Garmisch",
+    "location": {
+        "lat": 47.48366065087402,
+        "lng": 11.062357442164634
+    }
+}, {
+    "name": "US Naval Support Activity Souda Bay",
+    "location": {
+        "lat": 35.53242651875338,
+        "lng": 24.162126311615378
+    }
+}, {
+    "name": "Aviano Air Base",
+    "location": {
+        "lat": 46.02614122050169,
+        "lng": 12.611876816082374
+    }
+}, {
+    "name": "Camp Darby",
+    "location": {
+        "lat": 43.64417269928084,
+        "lng": 10.352458709682459
+    }
+}, {
+    "name": "Naval Air Station Sigonella",
+    "location": {
+        "lat": 37.408103474275094,
+        "lng": 14.911236797783602
+    }
+}, {
+    "name": "Naval Support Activity Naples",
+    "location": {
+        "lat": 40.99321612822993,
+        "lng": 14.246759132516134
+    }
+}, {
+    "name": "US Army Garrison Italy",
+    "location": {
+        "lat": 45.54106036081547,
+        "lng": 11.580962120348834
+    }
+}, {
+    "name": "Camp S. D. Butler",
+    "location": {
+        "lat": 26.295528706630826,
+        "lng": 127.7606369688298
+    }
+}, {
+    "name": "Camp Zama",
+    "location": {
+        "lat": 35.51225354883143,
+        "lng": 139.3950769748607
+    }
+}, {
+    "name": "Commander Fleet Activities Sasebo",
+    "location": {
+        "lat": 33.16885282911034,
+        "lng": 129.71406472650426
+    }
+}, {
+    "name": "Commander Fleet Activities Yokosuka",
+    "location": {
+        "lat": 35.29063327425285,
+        "lng": 139.66922311073444
+    }
+}, {
+    "name": "Kadena Air Base",
+    "location": {
+        "lat": 26.355688196662157,
+        "lng": 127.76786358187108
+    }
+}, {
+    "name": "Marine Corps Air Station Iwakuni",
+    "location": {
+        "lat": 34.158788868416316,
+        "lng": 132.23490086581054
+    }
+}, {
+    "name": "Misawa Air Base",
+    "location": {
+        "lat": 40.68976056045397,
+        "lng": 141.36699277630498
+    }
+}, {
+    "name": "Naval Air Facility Atsugi",
+    "location": {
+        "lat": 35.454094016874485,
+        "lng": 139.4331691134855
+    }
+}, {
+    "name": "Torii Station",
+    "location": {
+        "lat": 26.383433028540235,
+        "lng": 127.73972870943088
+    }
+}, {
+    "name": "Yokota Air Base",
+    "location": {
+        "lat": 35.742494329910954,
+        "lng": 139.33996738820315
+    }
+}, {
+    "name": "Commander Fleet Activities Chinhae",
+    "location": {
+        "lat": 35.15607742382946,
+        "lng": 128.65259409129482
+    }
+}, {
+    "name": "Kunsan Air Base",
+    "location": {
+        "lat": 35.914864012663266,
+        "lng": 126.6186522981698
+    }
+}, {
+    "name": "Osan Air Base",
+    "location": {
+        "lat": 37.08364469271251,
+        "lng": 127.03498616332672
+    }
+}, {
+    "name": "US Army Garrison Daegu",
+    "location": {
+        "lat": 35.850913499048296,
+        "lng": 128.60114487670486
+    }
+}, {
+    "name": "US Army Garrison Humphreys",
+    "location": {
+        "lat": 36.96576764899248,
+        "lng": 126.99940801065037
+    }
+}, {
+    "name": "US Army Garrison Red Cloud/Casey",
+    "location": {
+        "lat": 37.92237239602753,
+        "lng": 127.07743187008317
+    }
+}, {
+    "name": "US Army Garrison Yongsan",
+    "location": {
+        "lat": 37.526063406170714,
+        "lng": 126.98847195581276
+    }
+}, {
+    "name": "Navy Region Singapore",
+    "location": {
+        "lat": 1.4625011067665028,
+        "lng": 103.83127543465112
+    }
+}, {
+    "name": "Moron Air Base",
+    "location": {
+        "lat": 37.164018151816435,
+        "lng": -5.603552354956587
+    }
+}, {
+    "name": "Naval Station Rota",
+    "location": {
+        "lat": 36.63868413197539,
+        "lng": -6.332163827580891
+    }
+}, {
+    "name": "Incirlik Air Base",
+    "location": {
+        "lat": 36.997059392966605,
+        "lng": 35.43870751966125
+    }
+}, {
+    "name": "Izmir Air Station",
+    "location": {
+        "lat": 38.42237303370578,
+        "lng": 27.144975817171467
+    }
+}, {
+    "name": "Team DoD-Turkey",
+    "location": {
+        "lat": 39.93226210759694,
+        "lng": 32.85258337350414
+    }
+}, {
+    "name": "Navy Support Facility Diego Garcia",
+    "location": {
+        "lat": -7.314259644090477,
+        "lng": 72.42097756365841
+    }
+}, {
+    "name": "RAF Alconbury, RAF Molesworth",
+    "location": {
+        "lat": 52.36749173864874,
+        "lng": -0.21400346875056087
+    }
+}, {
+    "name": "RAF Croughton, Fairford",
+    "location": {
+        "lat": 51.99311586109012,
+        "lng": -1.1828935967717757
+    }
+}, {
+    "name": "RAF Lakenheath",
+    "location": {
+        "lat": 52.39687925203155,
+        "lng": 0.5503627929845836
+    }
+}, {
+    "name": "RAF Mildenhall",
+    "location": {
+        "lat": 52.37149794288591,
+        "lng": 0.46801357754149914
+    }
+}, {
+    "name": "USAG BENELUX Brunssum",
+    "location": {
+        "lat": 50.94518737514509,
+        "lng": 6.003992181130376
+    }
+}

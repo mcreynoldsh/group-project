@@ -335,8 +335,7 @@ def check_connections(request):
                     'email',
                     'first_name',
                     'last_name',
-                    'bio',
-                    'rate',
+                    'address',
                     'profile_pic'])
         return HttpResponse(data)
 
