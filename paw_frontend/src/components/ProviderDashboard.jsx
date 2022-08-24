@@ -66,7 +66,7 @@ function ProviderDashboard({ user, bases }) {
                 <Col>
                     <h4>Your Connections:</h4>
                     <hr />
-                    {connections && connections.map((connection) => (<div><h5>{connection.first_name} {connection.last_name}</h5> <p>Email: {connection.email} | Address: {connection.address}</p> <a className='new-line' href={`/#/chat/${connection.id}`}>Message</a> <hr /> </div>))}
+                    {connections && connections.map((connection) => (<div><h5>{connection.first_name} {connection.last_name}</h5> <p>Email: {connection.email}</p> <p>Address: {connection.address}</p> <a className='new-line' href={`/#/chat/${connection.id}`}>Message</a> <hr /> </div>))}
                 </Col>
             </Row>
         </Container>

@@ -374,8 +374,7 @@ def get_walk(request, walk_id):
                              "owner": name,
                              "notes": walk.notes,
                              "walk_length": walk.walk_length,
-                             "walker": walker_name,
-                             "walker_pic": walker_pic},
+                             "walker": walker_name},
                             safe=False)
 
 #PUT: updates Walk object after it is completed by pet provider

@@ -37,7 +37,9 @@ function MyStopwatch(props) {
       <Button variant='primary' size='sm' onClick={beginWalk}>Begin Walk</Button>
       <Button className="m-1" variant='secondary' size='sm' onClick={pause}>Pause Walk</Button>
       <Button variant='danger' size='sm' onClick={endWalk}>End Walk</Button>
-      <TrackWalker />
+      <div>
+        <TrackWalker />
+      </div>
     </div>
   );
 }
