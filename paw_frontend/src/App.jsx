@@ -18,6 +18,8 @@ import PetDetail from './pages/PetDetail';
 import PetEdit from './pages/PetEdit';
 import ProfilePage from './pages/ProfilePage';
 import EditProfile from './pages/EditProfile';
+import UploadProfilePic from './pages/UploadProfilePic';
+import UploadPetPic from './pages/UploadPetPic';
 
 const getCSRFToken = () => {
   let csrfToken
@@ -121,6 +123,8 @@ function App() {
           <Route path='/pet/:petID/edit' element={<PetEdit />} />
           <Route path='/user/:userID/view' element={<ProfilePage user={user} />} />
           <Route path='/user/:userID/edit' element={<EditProfile user={user} />} />
+          <Route path='/profilepic/upload' element={<UploadProfilePic />} />
+          <Route path='/petpic/upload/:petID' element={<UploadPetPic/>} />
         </Routes>
       </Router>
     </div>

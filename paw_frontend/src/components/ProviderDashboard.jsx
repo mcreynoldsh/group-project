@@ -9,8 +9,18 @@ function ProviderDashboard({ user, bases }) {
 
     const getConnections = async () => {
         const response = await axios.get('/checkconnections')
-        let checkConnects = response && response.data
-        setConnections(checkConnects)
+        let connectArray = []
+        if(response.data[0]){
+            for (let i = 0; i < response.data.length; i++) {
+                let connect = response.data[i].fields
+                connect["id"] = response.data[i].pk
+                connectArray.push(connect)
+              }
+        }
+        else{
+            connectArray = null
+        }
+        setConnections(connectArray)
     }
 
     const getProviderWalks = async () => {
@@ -25,9 +35,10 @@ function ProviderDashboard({ user, bases }) {
     return (
         <Container>
             <Row className='space'>
-                <Col></Col>
+                <Col>{user && <div className='text-center'><img className='profile-image' src={`/media/${user.profile_pic}`} alt="profile pic" />
+                                    <div><a href={`#/user/${user.id}/view`}>View Profile</a></div></div>}</Col>
                 <Col>
-                    {user && <div className='text-center'><h2 className="dash-header">{user.first_name}'s Dashboard</h2><a href={`#/user/${user.id}/view`}>View Profile</a></div>}
+                    {user && <div className='text-center'><h2 className="dash-header">{user.first_name}'s Dashboard</h2></div>}
                 </Col>
                 <Col>
                     {user && <CurrentWeather user={user} />}

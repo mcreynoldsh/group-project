@@ -9,7 +9,10 @@ function UserDashboard({ user, pets, bases }) {
 
     const getWalker = async () => {
         const checkProvider = await axios.get('/provider/get')
-        let checkWalker = checkProvider && checkProvider.data
+        let checkWalker = checkProvider && checkProvider.data && checkProvider.data[0].fields
+        if(checkWalker){
+            checkWalker['id'] = checkProvider.data[0].pk
+        }
         setWalker(checkWalker)
     }
 
@@ -32,21 +35,22 @@ function UserDashboard({ user, pets, bases }) {
     return (
         <Container>
             <Row className='space'>
-                <Col></Col>
+                <Col>{user && <div className='text-center'><img className='profile-image' src={`/media/${user.profile_pic}`} alt="profile pic" />
+                    <div><a href={`#/user/${user.id}/view`}>View Profile</a></div></div>}</Col>
                 <Col>
-                    {user && <div className='text-center'><h2 className="dash-header">{user.first_name}'s Dashboard</h2><a href={`#/user/${user.id}/view`}>View Profile</a></div>}
+                    {user && <div className='text-center align-content-center'><h2 className="dash-header space">{user.first_name}'s Dashboard</h2></div>}
                 </Col>
                 <Col></Col>
             </Row>
             <Row className='pt-5'>
-                <Col><h4 className="dash-header">Your Pets:</h4>
+                <Col className='text-center'><h4 className="dash-header">Your Pets:</h4>
                     <hr />
-                    {pets && pets.map((pet) => (<div className='same-line-div'><h5>{pet.species}: {pet.name} -</h5> <a href={`#/pet/${pet.id}/view`}>View Details</a></div>))}
+                    {pets && pets.map((pet) => (<div className="mb-2"><img className='small-pet-pic' src={`/media/${pet.pet_pic}`}  alt="pet pic" /><h5 className='mb-0'>{pet.name}</h5> <a href={`#/pet/${pet.id}/view`}>View Details</a></div>))}
                     <Button variant="primary" href='/#/addpet'>
                         Add Pet
                     </Button>
                 </Col>
-                <Col>
+                <Col className='text-center'>
                     <h4 className="dash-header">Your Bases:</h4>
                     <hr />
                     {bases && bases.map((base) => (<h5>{base}</h5>))}
@@ -54,10 +58,13 @@ function UserDashboard({ user, pets, bases }) {
                         Connect A Base
                     </Button>
                 </Col>
-                <Col>
+                <Col className='text-center'>
                     <h4 className="dash-header">Your Pet Pal:</h4>
                     <hr />
-                    {walker && <h5>{walker.first_name} {walker.last_name}</h5>}
+                    {walker &&  <div>
+                                    <img className='small-pic' src={`/media/${walker.profile_pic}`} alt="walker photo" />
+                                    <h5>{walker.first_name} {walker.last_name}</h5>
+                                </div>}
                     {user && walker && <a className='new-line' href={`/#/chat/${walker.id}`}>Message</a>}
                     {walker && <a className='new-line' href='/#/schedulewalk'>Schedule Walk</a>}
                     <Button variant="primary" href='/#/connectpal'>Connect A PetPal</Button>

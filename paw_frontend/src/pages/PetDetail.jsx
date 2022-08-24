@@ -10,7 +10,7 @@ function PetDetail() {
     const getPetByID = async () => {
         let response = await axios.get(`/pet/${petID}`)
         let check_pet = response && response.data
-        setPet(check_pet)
+        setPet(check_pet[0].fields)
     }
 
     useEffect(() => {
@@ -20,6 +20,8 @@ function PetDetail() {
     return (
         <Container>
             <Row>
+                <Col>{pet && <div><div className='space'><img className='pet-profile-image' src={`/media/${pet.pet_pic}`} alt="pet pic" /></div>
+                        <div><a href={`#/petpic/upload/${petID}`}>Add/Replace Pet Picture</a></div></div>}</Col>
                 <Col className="space">
                     <h4>Pet Detail:</h4>
                     <hr />
@@ -28,9 +30,10 @@ function PetDetail() {
                         <p>Weight: {pet.weight}</p>
                         <p>Age: {pet.age}</p>
                         <hr />
-                        <a href={`#/pet/${pet.id}/edit`}>Edit Details</a>
+                        <a href={`#/pet/${petID}/edit`}>Edit Details</a>
                     </div>}
                 </Col>
+                <Col></Col>
             </Row>
             <a href="/">Go back</a>
         </Container>

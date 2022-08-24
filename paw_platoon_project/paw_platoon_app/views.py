@@ -1,3 +1,4 @@
+from PIL import Image, ImageOps
 from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
 from .models import AppUser, Pet, Base, User, Walk, Walker
@@ -5,6 +6,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.core import serializers
 from django.forms.models import model_to_dict
 import json
+import os
 
 #returns static index.html page for REACT rendering
 def index(request):
@@ -103,7 +105,8 @@ def check_user(request):
                                              'bases',
                                              'bio',
                                              'rate',
-                                             'zip_code'])
+                                             'zip_code',
+                                             'profile_pic'])
         return HttpResponse(data)
     else:
         return JsonResponse({'user': None})
@@ -261,16 +264,18 @@ def get_provider(request):
         if walker is None:
             return HttpResponse("no walker")
         check_walker = walker.user
-        return JsonResponse(
-            model_to_dict(
-                check_walker,
+        data = serializers.serialize(
+                "json",
+                [check_walker],
                 fields=[
                     'id',
                     'email',
                     'first_name',
                     'last_name',
                     'bio',
-                    'rate']))
+                    'rate',
+                    'profile_pic'])
+        return HttpResponse(data)
 
 #POST: creates new Walk object from fields passed in request body
 @api_view(['POST'])
@@ -315,7 +320,7 @@ def get_pet_walks(request):
                 lambda pet: pet.name, walk_pets)), "date": walk.date, "time": walk.walk_time})
         return JsonResponse(return_list, safe=False)
 
-#GET: returns request user's connected pet provider
+#GET: returns all user's connected to requesting pet provider
 @api_view(['GET'])
 def check_connections(request):
     if request.user.is_authenticated:
@@ -324,12 +329,16 @@ def check_connections(request):
             AppUser.objects.all().filter(
                 walker__user=request.user))
         for app_user in app_users:
-            return_list.append({'id': app_user.user.id,
-                                'first_name': app_user.user.first_name,
-                                'last_name': app_user.user.last_name,
-                                'email': app_user.user.email,
-                                'address': app_user.user.address})
-        return JsonResponse(return_list, safe=False)
+            return_list.append(app_user.user)
+        data = serializers.serialize("json", return_list,fields=[
+                    'id',
+                    'email',
+                    'first_name',
+                    'last_name',
+                    'bio',
+                    'rate',
+                    'profile_pic'])
+        return HttpResponse(data)
 
 #GET: returns all Walk objects associated with requesting pet provider
 @api_view(['GET'])
@@ -355,6 +364,7 @@ def get_walk(request, walk_id):
         walk_pets = list(walk.pets.all())
         owner = walk.owner
         walker = walk.walker
+        walker_pic = walker.user.profile_pic
         walker_name = walker.user.first_name + " " + walker.user.last_name
         name = owner.first_name + " " + owner.last_name
         return JsonResponse({'id': walk.id,
@@ -365,7 +375,8 @@ def get_walk(request, walk_id):
                              "owner": name,
                              "notes": walk.notes,
                              "walk_length": walk.walk_length,
-                             "walker": walker_name},
+                             "walker": walker_name,
+                             "walker_pic": walker_pic},
                             safe=False)
 
 #PUT: updates Walk object after it is completed by pet provider
@@ -412,15 +423,16 @@ def pet_detail(request, pet_id):
         target_pet = Pet.objects.all().get(pk=pet_id)
 
         if request.method == 'GET':
-            return JsonResponse(
-                model_to_dict(
-                    target_pet,
+            data = serializers.serialize("json",
+                    [target_pet],
                     fields=[
                         'id',
                         'name',
                         'species',
                         'weight',
-                        'age']))
+                        'age',
+                        'pet_pic'])
+            return HttpResponse(data)
 
         if request.method == 'PUT':
             try:
@@ -433,3 +445,35 @@ def pet_detail(request, pet_id):
             except Exception as e:
                 return HttpResponse(e)
             return HttpResponse('success')
+
+
+@api_view(['POST'])
+def profile_pic(request):
+    if request.user.is_authenticated:
+        try:
+            with Image.open(request.data["file"]) as im:
+                im.thumbnail((200,200))
+                im.save(f'media/users/profile-pic-{request.user.id}.png')
+                request.user.profile_pic = f'users/profile-pic-{request.user.id}.png'
+                request.user.full_clean()
+                request.user.save()
+        except Exception as e:
+            print(e)
+        return HttpResponse('okay')
+
+@api_view(['POST'])
+def pet_pic(request, pet_id):
+    if request.user.is_authenticated:
+        target_pet = Pet.objects.all().get(pk=pet_id)
+        try:
+            with Image.open(request.data["file"]) as im:
+                im.thumbnail((200,200))
+                im = ImageOps.exif_transpose(im)
+                im.save(f'media/pets/pet-pic-{pet_id}.png')
+                target_pet.pet_pic = f'pets/pet-pic-{pet_id}.png'
+                target_pet.full_clean()
+                target_pet.save()
+        except Exception as e:
+            print(e)
+            return HttpResponse(e)
+        return HttpResponse('success')

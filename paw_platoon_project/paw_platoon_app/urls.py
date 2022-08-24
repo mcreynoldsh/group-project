@@ -23,5 +23,7 @@ urlpatterns = [
     path('getwalk/<int:walk_id>', views.get_walk),
     path('completewalk', views.complete_walk),
     path('getcompletedwalks', views.get_completed_walks),
-    path('pet/<int:pet_id>', views.pet_detail)
-]
+    path('pet/<int:pet_id>', views.pet_detail),
+    path('profilepic/upload', views.profile_pic),
+    path('petpic/upload/<int:pet_id>', views.pet_pic)
+    ]

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import (AbstractUser)
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class BaseManager(models.Manager):
@@ -27,7 +28,8 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=255)
     bases = models.ManyToManyField(Base)
     address = models.CharField(max_length=255)
-    profile_pic = models.FileField(upload_to='../media/', blank=True)
+    profile_pic = models.ImageField(
+        _("Image"), upload_to='users/', default='users/default-profile-icon.jpg')
     is_provider = models.BooleanField(default=False)
     is_user = models.BooleanField(default=False)
     rate = models.CharField(max_length=255, blank=True, default='$25')
@@ -65,7 +67,8 @@ class Pet(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     weight = models.CharField(max_length=255)
     age = models.CharField(max_length=255)
-    pet_pic = models.FileField(upload_to='../media/', blank=True)
+    pet_pic = models.ImageField(
+        _("Image"), upload_to='pets/', default='pets/default-pet-pic.jpg')
 
     def __str__(self):
         return self.name
