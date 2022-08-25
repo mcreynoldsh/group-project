@@ -107,16 +107,6 @@ def check_user(request):
                                              'rate',
                                              'zip_code',
                                              'profile_pic'])
-        f = open('/home/ubuntu/group-project/group-project/paw_frontend/src/data/locations.json')
-
-        data = json.load(f)
-
-        for i in data:
-           new_base = Base(name = i['name'])
-           new_base.full_clean()
-           new_base.save()
-
-        f.close()
         return HttpResponse(data)
     else:
         return JsonResponse({'user': None})
