@@ -455,9 +455,10 @@ def profile_pic(request):
                 request.user.profile_pic = f'users/profile-pic-{request.user.id}.png'
                 request.user.full_clean()
                 request.user.save()
+                return HttpResponse('okay')
         except Exception as e:
             print(e)
-        return HttpResponse('okay')
+            return HttpResponse(e)
 
 @api_view(['POST'])
 def pet_pic(request, pet_id):
