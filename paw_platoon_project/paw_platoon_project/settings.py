@@ -117,13 +117,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-STATIC_URL = 'static/'
+STATIC_ROOT  = "/home/ubuntu/group-project/paw_platoon_project/static"
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
-MEDIA_ROOT  = "/var/www/code-platoon.com/media"
+MEDIA_ROOT  = "/home/ubuntu/group-project/paw_platoon_project/media"
 MEDIA_URL = '/media/'
 
 # Default primary key field type
