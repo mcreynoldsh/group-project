@@ -3,14 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 function LoadingSpinner() {
     let navigate = useNavigate()
-    let timeoutID;
-
-    useEffect(()=>{
-        timeoutID = setTimeout(()=>{navigate('/login', {replace:true})},2000)
-        return (
-            clearTimeout(timeoutID)
-        )
-    },[])
+   
+    useEffect(() => {
+        const timer = setTimeout(() => navigate("/login", {replace:true}), 2000);
+        return () => clearTimeout(timer);
+        }, []);
+    
     return (
         <div className="spinner-container">
             <div className="loading-spinner">
