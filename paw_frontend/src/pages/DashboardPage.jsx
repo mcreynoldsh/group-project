@@ -1,10 +1,14 @@
 import UserDashboard from "../components/UserDashboard";
 import ProviderDashboard from "../components/ProviderDashboard";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { useNavigate } from "react-router-dom";
 
 
-function DashboardPage({ user, isProvider, logOut, pets, bases }) {
+function DashboardPage({ user, isProvider, pets, bases }) {
+    let navigate = useNavigate()
+    let timeoutID;
     if (!user) {
+        timeoutID = setTimeout(()=>{navigate('/login', {replace:true})},2000)
         return (
             <div>
                 <LoadingSpinner />
@@ -13,6 +17,7 @@ function DashboardPage({ user, isProvider, logOut, pets, bases }) {
 
     }
     else if (isProvider) {
+        clearTimeout(timeoutID)
         return (
             <div>
                 <ProviderDashboard user={user} bases={bases} />
@@ -20,6 +25,7 @@ function DashboardPage({ user, isProvider, logOut, pets, bases }) {
         )
     }
     else {
+        clearTimeout(timeoutID)
         return (
             <div>
                 <UserDashboard user={user} pets={pets} bases={bases} />
