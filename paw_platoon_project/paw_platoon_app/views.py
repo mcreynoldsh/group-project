@@ -385,6 +385,7 @@ def complete_walk(request):
         notes = request.data['notes']
         walk_time = request.data['walk_time']
         walk_id = request.data['walk_id']
+        walk_tracks = request.data['walk_tracks']
         try:
             walk = Walk.objects.all().get(pk=walk_id)
             walk.walk_length = walk_length

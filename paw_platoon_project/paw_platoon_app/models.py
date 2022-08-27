@@ -90,3 +90,4 @@ class Walk(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True)
+    walk_track = models.JSONField(default=dict)

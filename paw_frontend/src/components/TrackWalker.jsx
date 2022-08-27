@@ -14,7 +14,7 @@ export const TrackWalker = () => {
   } = usePosition(watch, { enableHighAccuracy: true });
 
   return (
-    <code>
+    <div>
       latitude: {latitude}<br/>
       longitude: {longitude}<br/>
       speed: {speed}<br/>
@@ -22,6 +22,6 @@ export const TrackWalker = () => {
       accuracy: {accuracy && `${accuracy} meters`}<br/>
       heading: {heading && `${heading} degrees`}<br/>
       error: {error}
-    </code>
+    </div>
   );
 };
