@@ -3,8 +3,11 @@ import ProviderDashboard from "../components/ProviderDashboard";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 
-function DashboardPage({ user, isProvider, logOut, pets, bases }) {
+
+function DashboardPage({ user, isProvider, pets, bases }) {
+  
     if (!user) {
+        
         return (
             <div>
                 <LoadingSpinner />
@@ -13,6 +16,7 @@ function DashboardPage({ user, isProvider, logOut, pets, bases }) {
 
     }
     else if (isProvider) {
+       
         return (
             <div>
                 <ProviderDashboard user={user} bases={bases} />
@@ -20,6 +24,7 @@ function DashboardPage({ user, isProvider, logOut, pets, bases }) {
         )
     }
     else {
+       
         return (
             <div>
                 <UserDashboard user={user} pets={pets} bases={bases} />

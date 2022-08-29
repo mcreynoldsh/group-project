@@ -349,11 +349,13 @@ def get_provider_walks(request):
             Walk.objects.all().filter(
                 walker=check_walker).filter(
                 complete=False))
-        for walk in walks:
-            walk_pets = list(walk.pets.all())
-            return_list.append({'id': walk.id, 'pets': list(map(
-                lambda pet: pet.name, walk_pets)), "date": walk.date, "time": walk.walk_time})
-        return JsonResponse(return_list, safe=False)
+        data = serializers.serialize('json', walks)
+        return HttpResponse(data)
+        # for walk in walks:
+        #     walk_pets = list(walk.pets.all())
+        #     return_list.append({'id': walk.id, 'pets': list(map(
+        #         lambda pet: pet.name, walk_pets)), "date": walk.date, "time": walk.walk_time})
+        # return JsonResponse(return_list, safe=False)
 
 #GET: returns Walk object associated with passed ID
 @api_view(['GET'])
@@ -458,8 +460,9 @@ def profile_pic(request):
                 request.user.save()
         except Exception as e:
             print(e)
-        return HttpResponse('okay')
-
+            return HttpResponse(e)
+        return HttpResponse('success')
+        
 @api_view(['POST'])
 def pet_pic(request, pet_id):
     if request.user.is_authenticated:
