@@ -64,10 +64,10 @@ html {
    /* Full height */
    height: 100vh;
 
-   /* Center and scale the image nicely */
-   background-repeat: no-repeat;
-   background-size: cover;
-   background-position: 60% 50%; 
+    /* Center and scale the image nicely */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 60% 50%; 
 }
 
 .login-div{
