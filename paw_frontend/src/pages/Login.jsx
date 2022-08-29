@@ -45,7 +45,6 @@ function Login({ checkUser }) {
                 </Col>
             </Row>
             <Row className='space login-pic'>
-                <Image fluid>
                 <Col className='text-center login-div text-white'>
                     <h2>Log In</h2>
                     <Form onSubmit={handleSubmit}>
@@ -66,7 +65,6 @@ function Login({ checkUser }) {
                         Sign Up
                     </Button>
                 </Col>
-                </Image>
             </Row>
             <Row className='pt-2'>
                 <Col></Col>
