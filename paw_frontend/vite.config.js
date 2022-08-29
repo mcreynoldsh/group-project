@@ -10,6 +10,8 @@ export default defineConfig({
     // this is the folder where vite will generate its output. Make sure django can serve files from here!
     outDir: '../paw_platoon_project/static',
     emptyOutDir: true,
+    sourcemap: true,
+    chunkSizeWarningLimit: 6000,
   },
   plugins: [react()]
 })

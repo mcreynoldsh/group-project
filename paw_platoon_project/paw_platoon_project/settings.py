@@ -24,11 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--9z=sjf9h6(p_%2q0^r5(h398!$aa2w7*&192)5lmkxu=vmwbi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
-CSRF_TRUSTED_ORIGINS = ['https://paw-platoon.com']
 
 # Application definition
 
@@ -117,13 +116,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATIC_ROOT  = "/home/ubuntu/group-project/paw_platoon_project/static"
-STATIC_URL = '/static/'
+
+STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
-MEDIA_ROOT  = "/home/ubuntu/group-project/paw_platoon_project/media"
+MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Default primary key field type
