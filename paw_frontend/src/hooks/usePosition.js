@@ -17,6 +17,7 @@ export const usePosition = (watch = false, userSettings = {}) => {
 
   const [position, setPosition] = useState({});
   const [error, setError] = useState(null);
+  const [isWatchOn, setIsWatchOn] = useState(watch)
 
   const onChange = ({coords, timestamp}) => {
     setPosition({
@@ -33,13 +34,19 @@ export const usePosition = (watch = false, userSettings = {}) => {
     setError(error.message);
   };
 
+  const toggleWatch = (start) => {
+     watch = start;
+     setIsWatchOn(start)
+     console.log(start)
+  }
+
   useEffect(() => {
     if (!navigator || !navigator.geolocation) {
       setError('Geolocation is not supported');
       return;
     }
-
-    if (watch) {
+    console.log("useEffect", isWatchOn)
+    if (isWatchOn) {
       const watcher =
         navigator.geolocation.watchPosition(onChange, onError, settings);
       return () => navigator.geolocation.clearWatch(watcher);
@@ -50,7 +57,8 @@ export const usePosition = (watch = false, userSettings = {}) => {
     settings.enableHighAccuracy,
     settings.timeout,
     settings.maximumAge,
+    isWatchOn,
   ]);
 
-  return {...position, error};
+  return {...position, error, toggleWatch};
 };
