@@ -60,13 +60,14 @@ html {
 }
 
 .login-pic {
-     background: url("https://i.pinimg.com/originals/a6/55/70/a65570bd40d125cfe6abacbf85e96b3b.jpg");
-    /* Full height */
-    height: 100vh;
+    background: url("https://i.pinimg.com/originals/a6/55/70/a65570bd40d125cfe6abacbf85e96b3b.jpg");
+   /* Full height */
+   height: 100vh;
 
-    /* Center and scale the image nicely */
-    background-repeat: no-repeat;
-    background-size: cover; 
+   /* Center and scale the image nicely */
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: 60% 50%; 
 }
 
 .login-div{
