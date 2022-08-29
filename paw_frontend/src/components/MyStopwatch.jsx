@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap'
 import { TrackWalker } from './TrackWalker';
 import { useState, useEffect } from 'react';
 import { usePosition } from '../hooks/usePosition';
+import WalkForm from '../components/WalkForm';
 
 function MyStopwatch(props) {
   const {
@@ -70,6 +71,9 @@ function MyStopwatch(props) {
       <Button variant='danger' size='sm' onClick={endWalk}>End Walk</Button>
       <div>
         <h3>latitude: {latitude}, longitude: {longitude}</h3>
+      </div>
+      <div>
+        {props.end && <WalkForm time={props.time} setErrorMessage={props.setErrorMessage} walkID={props.walkID} />}
       </div>
     </div>
   );

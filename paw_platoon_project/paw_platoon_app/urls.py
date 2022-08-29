@@ -25,5 +25,6 @@ urlpatterns = [
     path('getcompletedwalks', views.get_completed_walks),
     path('pet/<int:pet_id>', views.pet_detail),
     path('profilepic/upload', views.profile_pic),
-    path('petpic/upload/<int:pet_id>', views.pet_pic)
+    path('petpic/upload/<int:pet_id>', views.pet_pic),
+    path('providers/review', views.review)
     ]

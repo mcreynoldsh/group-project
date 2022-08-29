@@ -37,7 +37,9 @@ function ProviderPage({ getUserById }) {
             <Row className='pt-5 justify-content-center'>
 
                 <Col>
-                    {provider && <div><h3>{provider.first_name} {provider.last_name}</h3>
+                    {provider && <div>
+                        <img className = "profile-image" src={`/media/${provider.profile_pic}`} alt="Profile Picture" />
+                        <h3>{provider.first_name} {provider.last_name}</h3>
                         <p>Email: {provider.email}</p>
                         <p>Bases: {provider.bases.map((base)=>(base[1]+ ", "))}</p>
                         <p>Rate: {provider.rate} per walk</p>

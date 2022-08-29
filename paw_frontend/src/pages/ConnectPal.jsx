@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import Card from 'react-bootstrap/Card';
+import ReactStars from 'react-stars'
 
 function ConnectPal() {
 
@@ -25,29 +25,29 @@ function ConnectPal() {
     return (
         <Container>
             <Row>
-                <Col></Col>
-                <Col>
+                <Col xs={0} md={2}></Col>
+                <Col className="text-center" xs={12} md={8}>
                     {pals && pals.map((pal) => (
-                        <Card className='space pal-card' style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src="" />
-                            <Card.Body>
-                                <Card.Title>{pal.first_name} {pal.last_name}</Card.Title>
-                                <Card.Text>
-                                    Bio: {pal.bio}
-                                </Card.Text>
-                                <Card.Text>
-                                    Rate: {pal.rate} per walk
-                                </Card.Text>
-                                <Card.Text>
-                                    Bases: 
-                                </Card.Text>
-                                {pal.bases.map((base)=>(<Card.Text>{base}</Card.Text>))}
-                                <Button variant="primary" href={`#/providers/${pal.key}`}>View {pal.first_name}'s Info</Button>
-                            </Card.Body>
-                        </Card>
+                        <div className="walk-div space text-center">
+                            <img className="small-pic" src={`/media/users/profile-pic-${pal.key}.png`} alt="Profile Picture" />
+                            <h5>{pal.first_name} {pal.last_name}</h5>
+                            <ReactStars
+                                count={5}
+                                size={24}
+                                edit={false}
+                                color2={'#ffef5f'}
+                                value={pal.avg_rating} 
+                                className="centered-rating"/>
+                            <p>({pal.avg_rating})</p>
+                            <p>Bio: {pal.bio}</p>
+                            <p>Rate: {pal.rate} per walk</p>
+                            <p>Bases: </p>
+                            {pal.bases.map((base) => (<p>{base}</p>))}
+                            <Button variant="primary" href={`#/providers/${pal.key}`}>View {pal.first_name}'s Info</Button>
+                        </div>
                     ))}
                 </Col>
-                <Col></Col>
+                <Col xs={0} md={2}></Col>
             </Row>
         </Container>
     )

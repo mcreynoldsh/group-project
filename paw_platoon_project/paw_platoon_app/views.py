@@ -1,7 +1,7 @@
 from PIL import Image, ImageOps
 from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
-from .models import AppUser, Pet, Base, User, Walk, Walker
+from .models import AppUser, Pet, Base, User, Walk, Walker, Rating
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.core import serializers
 from django.forms.models import model_to_dict
@@ -106,7 +106,8 @@ def check_user(request):
                                              'bio',
                                              'rate',
                                              'zip_code',
-                                             'profile_pic'])
+                                             'profile_pic',
+                                             'avg_rating'])
         return HttpResponse(data)
     else:
         return JsonResponse({'user': None})
@@ -186,6 +187,7 @@ def connect_pal(request):
                              'last_name': value.last_name,
                              'bio': value.bio,
                              'rate': value.rate,
+                             'avg_rating': value.avg_rating,
                              'bases': list(map(lambda base: base.name,
                                                value_bases))}
                 emails.append(pal_info)
@@ -215,7 +217,9 @@ def user_detail(request, user_id):
                     'bases',
                     'rate',
                     'bio',
-                    'zip_code'],
+                    'zip_code',
+                    'avg_rating',
+                    'profile_pic'],
                 use_natural_foreign_keys=True)
             return HttpResponse(data)
 
@@ -274,7 +278,8 @@ def get_provider(request):
                     'last_name',
                     'bio',
                     'rate',
-                    'profile_pic'])
+                    'profile_pic',
+                    'avg_rating'])
         return HttpResponse(data)
 
 #POST: creates new Walk object from fields passed in request body
@@ -309,16 +314,13 @@ def schedule_walk(request):
 @api_view(['GET'])
 def get_pet_walks(request):
     if request.user.is_authenticated:
-        return_list = []
-        walks = list(
-            Walk.objects.all().filter(
-                owner=request.user).filter(
-                complete=False))
-        for walk in walks:
-            walk_pets = list(walk.pets.all())
-            return_list.append({'id': walk.id, 'pets': list(map(
-                lambda pet: pet.name, walk_pets)), "date": walk.date, "time": walk.walk_time})
-        return JsonResponse(return_list, safe=False)
+        if request.user.is_authenticated:
+            walks = list(
+                Walk.objects.all().filter(
+                    owner=request.user).filter(
+                    complete=False))
+            data = serializers.serialize('json', walks)
+            return HttpResponse(data)
 
 #GET: returns all user's connected to requesting pet provider
 @api_view(['GET'])
@@ -336,14 +338,14 @@ def check_connections(request):
                     'first_name',
                     'last_name',
                     'address',
-                    'profile_pic'])
+                    'profile_pic',
+                    'avg_rating'])
         return HttpResponse(data)
 
 #GET: returns all Walk objects associated with requesting pet provider
 @api_view(['GET'])
 def get_provider_walks(request):
     if request.user.is_authenticated:
-        return_list = []
         check_walker = Walker.objects.all().get(user=request.user)
         walks = list(
             Walk.objects.all().filter(
@@ -351,11 +353,7 @@ def get_provider_walks(request):
                 complete=False))
         data = serializers.serialize('json', walks)
         return HttpResponse(data)
-        # for walk in walks:
-        #     walk_pets = list(walk.pets.all())
-        #     return_list.append({'id': walk.id, 'pets': list(map(
-        #         lambda pet: pet.name, walk_pets)), "date": walk.date, "time": walk.walk_time})
-        # return JsonResponse(return_list, safe=False)
+       
 
 #GET: returns Walk object associated with passed ID
 @api_view(['GET'])
@@ -405,16 +403,12 @@ def complete_walk(request):
 @api_view(['GET'])
 def get_completed_walks(request):
     if request.user.is_authenticated:
-        return_list = []
         walks = list(
             Walk.objects.all().filter(
                 owner=request.user).filter(
                 complete=True))
-        for walk in walks:
-            walk_pets = list(walk.pets.all())
-            return_list.append({'id': walk.id, 'pets': list(map(
-                lambda pet: pet.name, walk_pets)), "date": walk.date, "time": walk.walk_time})
-        return JsonResponse(return_list, safe=False)
+        data = serializers.serialize('json', walks)
+        return HttpResponse(data)
 
 #GET: returns Pet object associated with ID passed as argument
 #PUT: updates Pet object associated with ID passed as argument with fields pass in request body
@@ -479,3 +473,43 @@ def pet_pic(request, pet_id):
             print(e)
             return HttpResponse(e)
         return HttpResponse('success')
+
+@api_view(['POST','GET'])
+def review(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            walker = User.objects.all().get(email=request.data['provider']['email'])
+            rating = request.data['rating']
+            comment = request.data['comment']
+            user = request.user
+            try:
+                new_rating = Rating(ratee=walker,rater=user,star_rating=rating,comment=comment)
+                new_rating.full_clean()
+                new_rating.save()
+                set_avg_rating(walker)
+            except Exception as e:
+                print(e)
+                return HttpResponse(e)
+                
+            return HttpResponse('okay')
+        if request.method == 'GET':
+            ratings = list(Rating.objects.all().filter(ratee = request.user))
+            data = serializers.serialize('json', ratings)
+            return HttpResponse(data)
+
+def set_avg_rating(user):
+    ratings = list(Rating.objects.all().filter(ratee = user))
+    total = 0
+    for rating in ratings:
+        total += rating.star_rating
+    avg = total/len(ratings)
+    avg = round(avg * 2) / 2
+    try:
+        user.avg_rating = avg
+        user.full_clean()
+        user.save()
+    except Exception as e:
+        print(e)
+
+
+

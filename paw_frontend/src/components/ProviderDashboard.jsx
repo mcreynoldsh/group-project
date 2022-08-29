@@ -47,7 +47,6 @@ function ProviderDashboard({ user, bases }) {
         else {
             walkArray = null
         }
-        console.log(walkArray)
         setWalks(walkArray)
     }
 
@@ -59,31 +58,33 @@ function ProviderDashboard({ user, bases }) {
             <Row className='space'>
                 <Col xs={12} md={4}>{user && <div className='text-center'><img className='profile-image' src={`/media/${user.profile_pic}`} alt="profile pic" />
                     <div><a href={`#/user/${user.id}/view`}>View Profile</a></div></div>}</Col>
-                <Col xs={12} md={4} className='text-center dash-header-div'>
-                    {user && <h2 className="dash-header">{user.first_name}'s Dashboard</h2>}
-                </Col>
                 <Col xs={12} md={4}>
+                {user && <div className='text-center align-content-center'><h2 className="dash-header pt-2">{user.first_name}'s Dashboard</h2></div>}
+                </Col>
+                <Col xs={12} md={4} className="pt-1">
                     {user && <CurrentWeather user={user} />}
                 </Col>
             </Row>
-            <Row className='space'>
-                <Col xs={12} md={4}>
+            <Row>
+                <Col xs={12} md={4} className='text-center pt-5'>
+                    <hr />
                     <h4>Upcoming Walks:</h4>
                     <hr />
                     {walks && walks.map((walk) => (<div className='walk-div text-center'><div className="same-line-div justify-content-center">{walk.pets.map((pet) => (<Card className="bg-dark text-white walk-pic'">
-                                                                                                                                                                            <Card.Img src={`media/${pet.pet_pic}`} alt="Pet image" />
-                                                                                                                                                                            <Card.ImgOverlay className='walk-pic-title'>
-                                                                                                                                                                                <Card.Title className='walk-pic-title'>{pet.name}</Card.Title>                                                                                                                                                                                                                           
-                                                                                                                                                                            </Card.ImgOverlay>
-                                                                                                                                                                        </Card>))}
-                                                                                        </div>
+                        <Card.Img src={`media/${pet.pet_pic}`} alt="Pet image" />
+                        <Card.ImgOverlay className='walk-pic-title'>
+                            <Card.Title className='walk-pic-title'>{pet.name}</Card.Title>
+                        </Card.ImgOverlay>
+                    </Card>))}
+                    </div>
                         <hr />
                         <p>Date: {walk.date}</p>
                         <p>Time: {walk.walk_time}</p>
                         <Button href={`/#/walk/${walk.id}`} variant="outline-primary" size='sm'>Begin Walk</Button>
                     </div>))}
                 </Col>
-                <Col xs={12} md={4}>
+                <Col xs={12} md={4} className='text-center pt-5'>
+                    <hr />
                     <h4>Your Bases:</h4>
                     <hr />
                     <div className='text-center'>
@@ -93,7 +94,8 @@ function ProviderDashboard({ user, bases }) {
                         </Button>
                     </div>
                 </Col>
-                <Col xs={12} md={4}>
+                <Col xs={12} md={4} className='text-center pt-5'>
+                    <hr />
                     <h4>Your Connections:</h4>
                     <hr />
                     {connections && connections.map((connection) => (<div className='text-center'><img className='small-pic' src={`/media/${connection.profile_pic}`} alt="profile picture" /><h5>{connection.first_name} {connection.last_name}</h5> <p>Email: {connection.email}</p> <p>Address: {connection.address}</p> <a className='new-line' href={`/#/chat/${connection.id}`}>Message</a> <hr /> </div>))}
