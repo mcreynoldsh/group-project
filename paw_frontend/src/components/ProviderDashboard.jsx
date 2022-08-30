@@ -78,8 +78,8 @@ function ProviderDashboard({ user, bases }) {
                     </Card>))}
                     </div>
                         <hr />
-                        <p>Date: {walk.date}</p>
-                        <p>Time: {walk.walk_time}</p>
+                        <p><strong>Date:</strong> {walk.date}</p>
+                        <p><strong>Time:</strong> {walk.walk_time}</p>
                         <Button href={`/#/walk/${walk.id}`} variant="outline-primary" size='sm'>Begin Walk</Button>
                     </div>))}
                 </Col>
@@ -98,7 +98,7 @@ function ProviderDashboard({ user, bases }) {
                     <hr />
                     <h4>Your Connections:</h4>
                     <hr />
-                    {connections && connections.map((connection) => (<div className='text-center'><img className='small-pic' src={`/media/${connection.profile_pic}`} alt="profile picture" /><h5>{connection.first_name} {connection.last_name}</h5> <p>Email: {connection.email}</p> <p>Address: {connection.address}</p> <a className='new-line' href={`/#/chat/${connection.id}`}>Message</a> <hr /> </div>))}
+                    {connections && connections.map((connection) => (<div className='text-center'><img className='small-pic' src={`/media/${connection.profile_pic}`} alt="profile picture" /><h5>{connection.first_name} {connection.last_name}</h5> <p><strong>Email:</strong> {connection.email}</p> <p><strong>Address:</strong> {connection.address}</p> <a className='new-line' href={`/#/chat/${connection.id}`}>Message</a> <hr /> </div>))}
                 </Col>
             </Row>
         </Container>

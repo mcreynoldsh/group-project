@@ -122,7 +122,7 @@ function App() {
           <Route path='/walk/:walkID/view' element={<WalkDetail />} />
           <Route path='/pet/:petID/view' element={<PetDetail />} />
           <Route path='/pet/:petID/edit' element={<PetEdit />} />
-          <Route path='/user/:userID/view' element={<ProfilePage user={user} />} />
+          <Route path='/user/:userID/view' element={<ProfilePage user={user} getUserById={getUserById} />} />
           <Route path='/user/:userID/edit' element={<EditProfile user={user} />} />
           <Route path='/profilepic/upload' element={<UploadProfilePic />} />
           <Route path='/petpic/upload/:petID' element={<UploadPetPic/>} />

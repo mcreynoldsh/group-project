@@ -194,3 +194,8 @@ html {
 .outlined-rating{
     -webkit-text-stroke: 1px black;
 }
+
+.same-line-rating{
+    display:inline-flex;
+    -webkit-text-stroke: 1px black;
+}
