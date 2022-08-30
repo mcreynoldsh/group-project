@@ -287,7 +287,7 @@ def get_provider(request):
 @api_view(['POST'])
 def schedule_walk(request):
     if request.user.is_authenticated:
-        walker = request.data['walker'][0]
+        walker = request.data['walker']
         pet_list = request.data['pets']
         date = request.data['date']
         time = request.data['time']
