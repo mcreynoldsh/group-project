@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Container, Row, Col } from 'react-bootstrap'
 import MyStopwatch from '../components/MyStopwatch'
-import WalkForm from '../components/WalkForm'
+
 
 function WalkPage(props) {
     let { walkID } = useParams()
@@ -38,13 +38,12 @@ function WalkPage(props) {
             </Row>
             <Row className='text-center'>
             <Col className='space'>
-                    {walk && <MyStopwatch setTime={setTime} setEnd={setEnd} />}
+                    {walk && <MyStopwatch setTime={setTime} setEnd={setEnd} time={time} setErrorMessage={setErrorMessage} walkID={walkID} end={end} />}
                 </Col>
             </Row>
             <Row>
                 <Col></Col>
                 <Col>
-                    {end && <WalkForm time={time} setErrorMessage={setErrorMessage} walkID={walkID} />}
                 </Col>
                 <Col></Col>
             </Row>

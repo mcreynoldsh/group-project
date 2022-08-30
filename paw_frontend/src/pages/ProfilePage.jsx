@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import ReactStars from 'react-stars'
 
 function ProfilePage(props) {
 
@@ -10,6 +11,17 @@ function ProfilePage(props) {
                     {props.user && <div>
                         <div><img className='profile-image space' src={`/media/${props.user.profile_pic}`} alt="profile pic" /></div>
                         <a href="#/profilepic/upload">Add/Replace Profile Picture</a></div>}
+                    {props.user && props.user.is_provider && <div>
+                                                                <p className='pt-2'>Average Rating: </p>
+                                                                <ReactStars
+                                                                    count={5}
+                                                                    size={24}
+                                                                    edit= {false}
+                                                                    color2={'#ffd700'}
+                                                                    value = {props.user.avg_rating}
+                                                                    className="outlined-rating" />
+                                                                    <p>({props.user.avg_rating})</p>
+                                                            </div>}
                 </Col>
                 <Col className="space">
                     <h4>User Profile:</h4>

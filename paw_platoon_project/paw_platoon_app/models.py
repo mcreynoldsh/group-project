@@ -35,6 +35,7 @@ class User(AbstractUser):
     rate = models.CharField(max_length=255, blank=True, default='$25')
     bio = models.TextField(blank=True)
     zip_code = models.CharField(max_length=5, default='79606')
+    avg_rating = models.DecimalField(blank=True,default=0, max_digits=2, decimal_places=1)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []  # Email & Password are required by default.
 
@@ -91,3 +92,10 @@ class Walk(models.Model):
         null=True,
         blank=True)
     walk_track = models.JSONField(default=dict)
+
+class Rating(models.Model):
+    ratee = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_ratings")
+    rater = models.ForeignKey(User, on_delete=models.CASCADE)
+    star_rating = models.PositiveSmallIntegerField()
+    comment = models.TextField(blank=True)
+    date = models.DateField(auto_now_add=True)

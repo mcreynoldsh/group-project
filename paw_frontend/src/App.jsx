@@ -20,6 +20,7 @@ import ProfilePage from './pages/ProfilePage';
 import EditProfile from './pages/EditProfile';
 import UploadProfilePic from './pages/UploadProfilePic';
 import UploadPetPic from './pages/UploadPetPic';
+import ReviewPage from './pages/ReviewPage';
 
 const getCSRFToken = () => {
   let csrfToken
@@ -125,6 +126,7 @@ function App() {
           <Route path='/user/:userID/edit' element={<EditProfile user={user} />} />
           <Route path='/profilepic/upload' element={<UploadProfilePic />} />
           <Route path='/petpic/upload/:petID' element={<UploadPetPic/>} />
+          <Route path='/review/:userID' element={<ReviewPage getUserById={getUserById} />} />
         </Routes>
       </Router>
     </div>

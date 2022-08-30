@@ -20,6 +20,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
+    "react-stars": "^2.2.5",
     "react-timer-hook": "^3.0.5",
     "stream-chat": "^6.7.3",
     "stream-chat-react": "^9.4.1",
