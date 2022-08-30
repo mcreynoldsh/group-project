@@ -18,7 +18,7 @@ function ScheduleWalk(props) {
         const check_provider = await axios.get('/provider/get')
         let check_walker = check_provider && check_provider.data
         console.log(check_walker)
-        setWalker(check_walker)
+        setWalker(check_walker[0])
     }
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -51,10 +51,12 @@ function ScheduleWalk(props) {
         getWalker()
     }, [])
     return (
-        <Container>
+        <Container fluid>
             <Row className='space justify-content-md-center'>
                 <Col md="auto">
-                    {walker && <h2>Schedule Walk with {walker.first_name}</h2>}
+                    {walker && <div className='text-center'><h2>Schedule Walk with</h2>
+                    <img className='small-pic' src={`media/${walker["fields"]["profile_pic"]}`} alt="Walker Pic" />
+                    <h2>{walker["fields"]["first_name"]} {walker["fields"]["last_name"]}</h2></div>}
                 </Col>
             </Row>
             <Row className='space justify-content-md-center'>
