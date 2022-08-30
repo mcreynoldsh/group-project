@@ -283,14 +283,16 @@ def get_provider(request):
         return HttpResponse(data)
 
 #POST: creates new Walk object from fields passed in request body
+#POST: creates new Walk object from fields passed in request body
 @api_view(['POST'])
 def schedule_walk(request):
     if request.user.is_authenticated:
-        walker = request.data['walker']
+        walker = request.data['walker'][0]
         pet_list = request.data['pets']
         date = request.data['date']
         time = request.data['time']
-        connect_walker = Walker.objects.all().get(user__email=walker["email"])
+        walker_user = User.objects.all().get(pk=walker["pk"])
+        connect_walker = Walker.objects.all().get(user=walker_user)
         try:
             walk = Walk(
                 walker=connect_walker,
@@ -305,9 +307,8 @@ def schedule_walk(request):
             walk.full_clean()
             walk.save()
         except Exception as e:
-            return HttpResponse('failure')
             print(e)
-
+            return HttpResponse('failure')
         return HttpResponse('okay')
 
 #GET: returns Walk objects of all request user's pets
@@ -385,13 +386,15 @@ def complete_walk(request):
         notes = request.data['notes']
         walk_time = request.data['walk_time']
         walk_id = request.data['walk_id']
-        walk_tracks = request.data['walk_tracks']
+        print(f"req.data: {request.data}")
+        tracks = request.data['tracks']
         try:
             walk = Walk.objects.all().get(pk=walk_id)
             walk.walk_length = walk_length
             walk.notes = notes
             walk.walk_time = walk_time
             walk.complete = True
+            walk.walk_track = tracks
             walk.full_clean()
             walk.save()
         except Exception as e:

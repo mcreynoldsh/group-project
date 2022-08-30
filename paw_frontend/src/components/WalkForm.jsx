@@ -22,6 +22,7 @@ function WalkForm(props) {
             'walk_length': event.target[0].value,
             'notes': event.target[1].value,
             'walk_time': event.target[2].placeholder,
+            'tracks': props.tracks,
         }).then((response) => {
             if (response.data == 'success') {
                 navigate("/", { replace: true })
