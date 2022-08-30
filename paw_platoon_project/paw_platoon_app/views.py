@@ -286,11 +286,12 @@ def get_provider(request):
 @api_view(['POST'])
 def schedule_walk(request):
     if request.user.is_authenticated:
-        walker = request.data['walker']
+        walker = request.data['walker'][0]
         pet_list = request.data['pets']
         date = request.data['date']
         time = request.data['time']
-        connect_walker = Walker.objects.all().get(user__email=walker["email"])
+        walker_user = User.objects.all().get(pk=walker["pk"])
+        connect_walker = Walker.objects.all().get(user=walker_user)
         try:
             walk = Walk(
                 walker=connect_walker,
@@ -305,9 +306,8 @@ def schedule_walk(request):
             walk.full_clean()
             walk.save()
         except Exception as e:
-            return HttpResponse('failure')
             print(e)
-
+            return HttpResponse('failure')
         return HttpResponse('okay')
 
 #GET: returns Walk objects of all request user's pets
