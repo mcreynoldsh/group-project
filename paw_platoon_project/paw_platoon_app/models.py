@@ -91,7 +91,7 @@ class Walk(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True)
-    walk_track = models.JSONField(default=dict, blank=True, null= True)
+    walk_track = models.JSONField(blank=True, default=dict)
 
 class Rating(models.Model):
     ratee = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_ratings")

@@ -18,6 +18,7 @@ function MyStopwatch(props) {
 
   const [tracks, setTracks] = useState([])
   const [startTracking, setStartTracking] = useState(false)
+  const [walkTracks, setWalkTracks] = useState({});
 
   const watch = false;
   const {
@@ -32,22 +33,37 @@ function MyStopwatch(props) {
   } = usePosition(watch, { enableHighAccuracy: true });
 
   useEffect(() => {
-    if(tracks.length > 0) {
+    if(tracks.length < 1) {
+      setTracks([{"latitude": latitude, "longitude": longitude}])
+    }else {
       setTracks( (currentTrack) => {
-        [...currentTrack, {"latitude": latitude, "longitude":longitude}]
+        console.log(`currentTrack-1: `, currentTrack);
+        if(tracks[0].latitude === undefined) {
+          setTracks( (currentTrack) => {
+            currentTrack.shift()
+            return currentTrack
+          })
+        }
+        return [...currentTrack, {"latitude": latitude, "longitude":longitude}]
       })
     }
     console.log(latitude, longitude)
+    // const walkTracks = tracks
   }, [latitude, longitude])
-
-
 
   const endWalk = (event) => {
     event.preventDefault();
     pause();
     props.setTime(`${hours}:${minutes}:${seconds}`);
     props.setEnd(true);
+    setTracks( (currentTrack) => {
+      tracks.shift();
+        return [...currentTrack]
+    });
     toggleWatch(false);
+    console.log('tracks: ');
+    console.log(tracks);
+    
   }
 
   const beginWalk = (event) => {
@@ -73,7 +89,7 @@ function MyStopwatch(props) {
         <h3>latitude: {latitude}, longitude: {longitude}</h3>
       </div>
       <div>
-        {props.end && <WalkForm time={props.time} setErrorMessage={props.setErrorMessage} walkID={props.walkID} />}
+        {props.end && <WalkForm time={props.time} setErrorMessage={props.setErrorMessage} walkID={props.walkID} tracks={tracks} />}
       </div>
     </div>
   );
