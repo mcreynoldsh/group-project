@@ -61,11 +61,6 @@ function MyStopwatch(props) {
         return [...currentTrack]
     });
     toggleWatch(false);
-    // tracks.shift();
-    // walkTracks.tracks = JSON.stringify(props.tracks);
-    // setWalkTracks( () => {
-    //   walkTracks.tracks = JSON.stringify(tracks)
-    // })
     console.log('tracks: ');
     console.log(tracks);
     
