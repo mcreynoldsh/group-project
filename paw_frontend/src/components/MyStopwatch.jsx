@@ -38,6 +38,7 @@ function MyStopwatch(props) {
     }else {
       setTracks( (currentTrack) => {
         console.log(`currentTrack-1: `, currentTrack);
+        // remove first track that loads as undefined
         if(tracks[0].latitude === undefined) {
           setTracks( (currentTrack) => {
             currentTrack.shift()
@@ -57,6 +58,7 @@ function MyStopwatch(props) {
     props.setTime(`${hours}:${minutes}:${seconds}`);
     props.setEnd(true);
     setTracks( (currentTrack) => {
+      // remove inital coords recorded when page loads and before begin button clicked
       tracks.shift();
         return [...currentTrack]
     });
