@@ -530,5 +530,11 @@ def set_avg_rating(user):
     except Exception as e:
         print(e)
 
+@api_view(['GET'])
+def reviews_by_id(request, user_id):
+    if request.user.is_authenticated:
+        ratings = list(Rating.objects.all().filter(ratee = user_id))
+        data = serializers.serialize('json', ratings)
+        return HttpResponse(data)
 
 

@@ -122,9 +122,9 @@ function UserDashboard({ user, pets, bases }) {
                     </Card>))}
                     </div>
                         <hr />
-                        <p>Date: {walk.date}</p>
-                        <p>Time: {walk.walk_time}</p>
-                        <p>With: {walker.first_name} {walker.last_name}</p>
+                        <p><strong>Date:</strong> {walk.date}</p>
+                        <p><strong>Time:</strong> {walk.walk_time}</p>
+                        <p><strong>With:</strong> {walker.first_name} {walker.last_name}</p>
                     </div>))}
                 </Col>
                 <Col xs={12} md={6} className='pt-5 text-center'>
@@ -139,9 +139,9 @@ function UserDashboard({ user, pets, bases }) {
                     </Card>))}
                     </div>
                         <hr />
-                        <p>Date: {walk.date}</p>
-                        <p>Time Walked (hrs:mins:secs): {walk.walk_time}</p>
-                        <p>With: {walker.first_name} {walker.last_name}</p>
+                        <p><strong>Date:</strong> {walk.date}</p>
+                        <p><strong>Time Walked (hrs:mins:secs):</strong> {walk.walk_time}</p>
+                        <p><strong>With:</strong> {walker.first_name} {walker.last_name}</p>
                         <a href={`#/walk/${walk.id}/view`}>View Details</a>
                     </div>))}
                 </Col>
