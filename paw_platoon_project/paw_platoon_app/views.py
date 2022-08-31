@@ -92,6 +92,19 @@ def log_out(request):
 #GET: returns serialized User object of the requesting user
 @api_view(['GET'])
 def check_user(request):
+
+    ## Use after dropping DB
+    # import json
+
+    # f = open('/media/johno/NTFS_Share/codeplatoon/assignments/GroupProject/group-project/paw_frontend/src/data/locations.json')
+
+    # data = json.load(f)
+
+    # for i in data:
+    #     base = Base(name=i["name"])
+    #     base.full_clean()
+    #     base.save()
+
     if request.user.is_authenticated:
         data = serializers.serialize("json",
                                      [request.user],
@@ -111,6 +124,8 @@ def check_user(request):
         return HttpResponse(data)
     else:
         return JsonResponse({'user': None})
+
+
 
 #POST: creates new Pet object with requesting user as owner
 @api_view(['POST'])
@@ -283,11 +298,10 @@ def get_provider(request):
         return HttpResponse(data)
 
 #POST: creates new Walk object from fields passed in request body
-#POST: creates new Walk object from fields passed in request body
 @api_view(['POST'])
 def schedule_walk(request):
     if request.user.is_authenticated:
-        walker = request.data['walker'][0]
+        walker = request.data['walker']
         pet_list = request.data['pets']
         date = request.data['date']
         time = request.data['time']
@@ -364,6 +378,7 @@ def get_walk(request, walk_id):
         walk_pets = list(walk.pets.all())
         owner = walk.owner
         walker = walk.walker
+        walk_track = walk.walk_track
         walker_pic = walker.user.profile_pic
         walker_name = walker.user.first_name + " " + walker.user.last_name
         name = owner.first_name + " " + owner.last_name
@@ -375,7 +390,8 @@ def get_walk(request, walk_id):
                              "owner": name,
                              "notes": walk.notes,
                              "walk_length": walk.walk_length,
-                             "walker": walker_name},
+                             "walker": walker_name,
+                             "walk_track": walk_track},
                             safe=False)
 
 #PUT: updates Walk object after it is completed by pet provider

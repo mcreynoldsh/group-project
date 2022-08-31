@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Container, Row, Col } from 'react-bootstrap'
+import Temp from '../components/Temp'
 
 function WalkDetail() {
     let { walkID } = useParams()
@@ -10,11 +11,15 @@ function WalkDetail() {
     const getWalkByID = async () => {
         let response = await axios.get(`/getwalk/${walkID}`)
         let check_walk = response && response.data
-        setWalk(check_walk)
+        setWalk( () => {
+            return check_walk
+
+        })
     }
 
     useEffect(() => {
         getWalkByID()
+
     }, [])
 
     return (
@@ -30,6 +35,7 @@ function WalkDetail() {
                         <p>Distance Walked: {walk.walk_length}</p>
                         <p>Notes: {walk.notes}</p>
                         <hr />
+                        <Temp walkTrack={walk.walk_track} />
                     </div>}
                 </Col>
             </Row>
