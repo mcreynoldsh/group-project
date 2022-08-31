@@ -34,18 +34,18 @@ function MyStopwatch(props) {
 
   useEffect(() => {
     if(tracks.length < 1) {
-      setTracks([{"latitude": latitude, "longitude": longitude}])
+      setTracks([{"lat": latitude, "lng": longitude}])
     }else {
       setTracks( (currentTrack) => {
         console.log(`currentTrack-1: `, currentTrack);
         // remove first track that loads as undefined
-        if(tracks[0].latitude === undefined) {
+        if(tracks[0].lat === undefined) {
           setTracks( (currentTrack) => {
             currentTrack.shift()
             return currentTrack
           })
         }
-        return [...currentTrack, {"latitude": latitude, "longitude":longitude}]
+        return [...currentTrack, {"lat": latitude, "lng":longitude}]
       })
     }
     console.log(latitude, longitude)

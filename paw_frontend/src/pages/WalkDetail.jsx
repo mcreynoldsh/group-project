@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Container, Row, Col } from 'react-bootstrap'
-import Temp from '../components/Temp'
+import WalkMap from '../components/WalkMap'
 
 function WalkDetail() {
     let { walkID } = useParams()
@@ -35,7 +35,7 @@ function WalkDetail() {
                         <p>Distance Walked: {walk.walk_length}</p>
                         <p>Notes: {walk.notes}</p>
                         <hr />
-                        <Temp walkTrack={walk.walk_track} />
+                        <WalkMap walkTrack={walk.walk_track} />
                     </div>}
                 </Col>
             </Row>
